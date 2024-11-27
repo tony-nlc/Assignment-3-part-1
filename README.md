@@ -110,8 +110,11 @@ sudo systemctl status generate-index.service
 sudo systemctl status generate-index.timer
 ```
 For service,
+
 ![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/service.png)
+
 For timer,
+
 ![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/timer.png)
 
 
