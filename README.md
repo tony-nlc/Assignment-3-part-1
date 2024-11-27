@@ -167,6 +167,7 @@ mkdir /etc/nginx/sites-available
 mkdir /etc/nginx/sites-enabled
 ```
 
+## 3.2 Server Block
 Then,create a new file name `example.conf` in your sites-avaliable using `sudo nvim /etc/nginx/sites-available/example.conf`.
 
 With the following content:
@@ -207,3 +208,62 @@ You can check the status by,
 ![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/nginx.png)
 
 ---
+
+# Task4
+In this task, we will setup a firewall using `ufw`. Firewall is essiential for security reason. We will set up firewall allow ssh and http from anywhere. Let's start with installing `ufw`
+
+`sudo pacman -S ufw`
+## 4.1 Setting up firewall
+There are some good defaults we can set for our firewall are denying all incoming traffic and allow all outgoing traffic.
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+## 4.2 Allowing Port
+We will enable ssh and http connection in this task. Therefore, we will enable port 22(SSH), port 80(HTTP) and optionally 443(HTTPS).
+
+```bash
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+```
+
+As mentioned, we also need to limit the rate of ssh, we can perform this action by the following:
+`sudo ufw limit ssh`
+
+After all, you need to enable your firewall and its service by the following command:
+```bash
+sudo ufw enable
+sudo systemctl enable --now ufw.service
+```
+
+Finally, use this command to hcek if everything is working.
+`sudo ufw status verbose`
+After running this command, you should be able to see 
+
+![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/firewall.png)
+
+You can check the status by,
+
+`sudo systemctl status ufw.service`
+
+---
+
+# Task5
+Finally, you should be able to check your system information page. 
+
+You can get your ip by `ip addr`.
+
+![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/ip.png)
+
+Then restart your nginx service by, 
+```bash
+sudo systemctl stop nginx
+sudo systemctl start nginx
+```
+
+Then, enter the ip address to your browser's address bar.
+
+If everything is correct, you should be able to see the following image.
+![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/success.png)
