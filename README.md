@@ -266,4 +266,5 @@ sudo systemctl start nginx
 Then, enter the ip address to your browser's address bar.
 
 If everything is correct, you should be able to see the following image.
+
 ![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/success.png)
