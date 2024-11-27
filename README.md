@@ -4,6 +4,8 @@ The goal of this assignment is to setup a Bash script that generates a static in
 run automatically every day at 05:00 using a systemd service and timer. The HTML document created by this script will be served with an nginx web server that will
 run on your Arch Linux droplet along with a firewall setup using ufw to help secure your server.
 
+---
+
 # Task 1
 ## 1.1 Create User
 In this part, We will create a new system user `webgen` with a home directory at /var/lib/webgen and a login shell appropriate for a non-login user. 
@@ -48,7 +50,7 @@ The reason we use system user instead of regular user or root user are,
 - root user has too much privilege. It violates least privilege principle.
 - system users are usually created specifically for running system services and applications. [https://www.freecodecamp.org/news/how-to-manage-users-in-linux/#heading-type-of-users-in-linux]
 - regular users are created by the administrator and can access the system and its resources based on their permissions. [https://www.freecodecamp.org/news/how-to-manage-users-in-linux/#heading-type-of-users-in-linux]
-
+---
 # Task 2
 ## 2.1 Create Service File
 Before we can start a service, we need a service file. At the same time, we need the service run everyday at 05:00. Therefore, we need a timer file. Let's start with creating service file.
@@ -105,4 +107,12 @@ Breakdown of `generate-index.timer`:
 If you want to check the timer is active and the services runs successfully, use the following commands.
 ```bash
 sudo systemctl status generate-index.service
+sudo systemctl status generate-index.timer
 ```
+For service,
+![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/service.png)
+For timer,
+![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/timer.png)
+
+
+---
