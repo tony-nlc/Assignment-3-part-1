@@ -117,5 +117,93 @@ For timer,
 
 ![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/timer.png)
 
+---
+
+# Task3
+Nginx is an web server software. In our assignment we will use it for hosting our webpage. Let's start with installing the `nginx`.
+```bash
+sudo pacman -S nginx
+```
+## 3.1 Modify `nginx.conf` file
+Then, we will modify the `nginx.conf`. You can delete all the content in your current nginx.conf and paste the following:
+```bash
+user webgen webgen;
+worker_processes auto;
+worker_cpu_affinity auto;
+
+events {
+    multi_accept on;
+    worker_connections 1024;
+}
+
+http {
+    charset utf-8;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    server_tokens off;
+    log_not_found off;
+    types_hash_max_size 4096;
+    client_max_body_size 16M;
+
+    # MIME
+    include mime.types;
+    default_type application/octet-stream;
+
+    # logging
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log warn;
+
+    # load configs
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+```
+Make sure you change the first to desire user and group. In this assignment, we will use webgen webgen.
+
+Use the following commands to create two directories for managing server entities:
+```bash
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+```
+
+Then,create a new file name `example.conf` in your sites-avaliable using `sudo nvim /etc/nginx/sites-available/example.conf`.
+
+With the following content:
+```bash
+server {
+    listen 80;
+    listen [::]:80;
+    
+    server_name _;
+    
+    root /var/lib/webgen/HTML
+    index index.html;
+    
+    location / {
+        try__files $uri $uri/ =404;
+    }
+}
+```
+
+Then, make sure by the end of your `nginx.conf` you have include `include sites-enable/*;`
+
+After that, you can enable a site with
+
+`ln -s /etc/nginx/sites-available/example.conf /etc/nginx/sites-enabled/example.conf`
+
+Or disable a site with
+
+`unlink /etc/nginx/sites-enabled/example.conf`
+
+Then, you need to enable your `nginx` service with the following command.
+`sudo systemctl enable nginx`
+
+It is important to use a separate server bolck file because it is easier for managing enable/disable sites.
+
+You can check the status by,
+`sudo systemctl nginx`
+
+![alt text](https://github.com/tony-nlc/Assignment-3-part-1/blob/main/assets/nginx.png)
 
 ---
