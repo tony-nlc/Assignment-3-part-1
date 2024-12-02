@@ -178,7 +178,7 @@ server {
     
     server_name _;
     
-    root /var/lib/webgen/HTML
+    root /var/lib/webgen/HTML;
     index index.html;
     
     location / {
