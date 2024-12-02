@@ -182,7 +182,7 @@ server {
     index index.html;
     
     location / {
-        try__files $uri $uri/ =404;
+        try_files $uri $uri/ =404;
     }
 }
 ```
